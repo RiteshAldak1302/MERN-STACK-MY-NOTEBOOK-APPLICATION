@@ -1,0 +1,14 @@
+{
+  "name": "my-notebook-backend",
+  "version": "1.0.0",
+  "description": "my-notebook your note book on hte cloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.0.12"
+  }
+}

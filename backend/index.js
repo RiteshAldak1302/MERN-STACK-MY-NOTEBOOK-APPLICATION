@@ -5,7 +5,7 @@ const authRouter  =require("./routes/auth")
 // const notesRouter =require("./routes/notes")
 connect_to_mongo();
 const app = express()
-const port = 3000
+const port = 5000
 
 // Available Routes
 // app.use('/api/auth', require("./routes/auth"))

@@ -2,7 +2,7 @@
 const connect_to_mongo = require('./db');
 const express = require('express')
 const authRouter  =require("./routes/auth")
-// const notesRouter =require("./routes/notes")
+const notesRouter =require("./routes/notes")
 connect_to_mongo();
 const app = express()
 const port = 5000
@@ -11,8 +11,8 @@ const port = 5000
 // app.use('/api/auth', require("./routes/auth"))
 // app.use('/api/notes', require("./routes/notes"))
 app.use(express.json()); // when we use req.body then we have to use this middleware
+app.use(notesRouter) 
 app.use(authRouter)
-// app.use(notesRouter) 
 
 
 app.get('/', (req, res) => {

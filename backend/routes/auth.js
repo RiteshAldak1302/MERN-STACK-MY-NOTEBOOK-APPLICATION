@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+var fetchUser = require('../middleware/fetchUser')
 const JWT_SCREAT = "ritesh#$%"; //this JWT_Screact is send by us for JWT_Token
 
 //Route 1: post request for creating a data for new user
@@ -113,19 +114,21 @@ router.post("/api/auth/login",
     }
   })
 
+  // [ //there is no need to added this checkpoints becoz here we have to give user details 
+  //   //this all code is copied from express-validator website
+  //   body("email", "Enter a valid email").isEmail(),
+  //   body("password", "Password cannot be blank").exists(),  //by the exists method , password can not be blank
+  // ],
+
   //Route 3: Get logged in user details (this is not verfiaction of email and password ) 
-  router.post("/api/auth/getuser",
-  [
-    //this all code is copied from express-validator website
-    body("email", "Enter a valid email").isEmail(),
-    body("password", "Password cannot be blank").exists(),  //by the exists method , password can not be blank
-  ],
-  async (req, res) => {
+  router.post("/api/auth/getuser", fetchUser, async (req , res) => {
    
     try{
-         userId = " todo";
+      //here we fetch the userid from auth-token becoz the user id is present in auth-token as payloadData and we fetching userid from middleware where we decode the userid from JWT 
+         const userId = req.user.id; 
          const user = await User.findById(userId).select("-password")  //this .select method select everthing exclude password
-
+         res.send(user)
+                                                                                                                
     }
     catch (error){
       console.error(error.message);

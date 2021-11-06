@@ -4,7 +4,7 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SCREAT = "ritesh#$%";
+const JWT_SCREAT = "ritesh#$%"; //this JWT_Screact is send by us for JWT_Token
 
 //Route 1: post request for creating a data for new user
 router.post(
@@ -78,7 +78,9 @@ router.post("/api/auth/login",
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body; //here we use destructuring 
+    // const { email, password } = req.body;  //instead of destructuring we can use code which written below ( which is a simple way)
+    const email = req.body.email ;
+    const password = req.body.password;
 
     try {
       let user = await User.findOne({ email });
@@ -95,13 +97,13 @@ router.post("/api/auth/login",
      if(!passwordCompare){
            return res.status(400).json({error: "please try to login with correct credentials"})
           }
-        // const  JWT_SCREAT ="ritesh@132565"
+         //this data is payload data which send Along with JWT token
           const data = {
             user:{
               id:user.id
             }
           }
-          const authToken = jwt.sign(data, JWT_SCREAT);
+          const authToken = jwt.sign(data, JWT_SCREAT);  //we send data (payload data) and JWT_SCREAT key( which is defined by us)
       res.json({ authToken });
           }
     
@@ -112,6 +114,28 @@ router.post("/api/auth/login",
   })
 
   //Route 3: Get logged in user details (this is not verfiaction of email and password ) 
+  router.post("/api/auth/getuser",
+  [
+    //this all code is copied from express-validator website
+    body("email", "Enter a valid email").isEmail(),
+    body("password", "Password cannot be blank").exists(),  //by the exists method , password can not be blank
+  ],
+  async (req, res) => {
+   
+    try{
+         userId = " todo";
+         const user = await User.findById(userId).select("-password")  //this .select method select everthing exclude password
+
+    }
+    catch (error){
+      console.error(error.message);
+      res.status(500).send("some internal server error occured");
+    }
+
+
+  })
+
+
   
 
     module.exports = router

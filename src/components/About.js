@@ -1,11 +1,12 @@
 import React from 'react'
 
-function About() {
+
+const About =() =>{
+    
     return (
         <div>
-            this is about page
-
-            
+            this is About
+          
         </div>
     )
 }

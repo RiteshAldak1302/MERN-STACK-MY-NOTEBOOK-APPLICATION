@@ -1,18 +1,15 @@
 import React from "react";
-import { useContext  } from "react";
-import noteContext from "../context/notes/noteContext"
+
+import Notes from "./Notes";
 
 const Home = () => {
-    const context = useContext(noteContext)
-    const { notes , setNotes} = context 
+    
   return (
-    <> 
-    <div className="container my-3">
-      <h1>Add a Note</h1>
-      <form className="my-3">
-        <div className="mb-3">
+      <>
+      <form className="  my-3" style={{"width":"65rem"}}>
+        <div className="mb-2">
           <label for="exampleInputEmail1" className="form-label">
-            Email address
+            Title
           </label>
           <input
             type="email"
@@ -20,13 +17,10 @@ const Home = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
           <label for="exampleInputPassword1" className="form-label">
-            Password
+            Description
           </label>
           <input
             type="password"
@@ -48,15 +42,9 @@ const Home = () => {
           Submit
         </button>
       </form>
-      </div>
-      <div className="container my-3">
-      <h1>Add a Note</h1>
-      {notes.map((notes)=>{
-          return (notes.title , notes.description ) ;
-      })}
-      </div>
-
-    </>
+     
+      <Notes/>
+      </>
   );
 };
 

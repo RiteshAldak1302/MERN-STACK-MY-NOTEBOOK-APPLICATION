@@ -40,13 +40,40 @@ const NoteState = (props) =>{
         "tag": "personal",
         "__v": 0
     }
+    ,
+    {
+        "_id": "61878c9119c52d7b2922be0d",
+        "user": "6182f2b2ff4fcacc2fb6f7c0",
+        "title": "typing practice",
+        "description": "i have spend one hour on typing practice",
+        "tag": "personal",
+        "__v": 0
+    }
+    ,
+    {
+        "_id": "61878c9119c52d7b2922be0d",
+        "user": "6182f2b2ff4fcacc2fb6f7c0",
+        "title": "typing practice",
+        "description": "i have spend one hour on typing practice",
+        "tag": "personal",
+        "__v": 0
+    }
+    ,
+    {
+        "_id": "61878c9119c52d7b2922be0d",
+        "user": "6182f2b2ff4fcacc2fb6f7c0",
+        "title": "typing practice",
+        "description": "i have spend one hour on typing practice",
+        "tag": "personal",
+        "__v": 0
+    }
   ]
   
   const [notes, setNotes] = useState(noteInitial)
   return (
       // context me notes and setNotes ja raha h 
       <NoteContext.Provider value={{notes , setNotes}}>  
-            {props.children}
+            {props.children} 
         </NoteContext.Provider>
     )
 }

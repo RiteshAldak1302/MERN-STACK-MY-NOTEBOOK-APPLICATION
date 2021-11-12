@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Alert from "./components/Alert";
 
 
 
@@ -14,6 +15,7 @@ function App() {
     <NoteState>
       <Router>
         <Navbar /> 
+        <Alert  message={"Note has been deleted"}/>
         <div className="container"> 
         <Switch>
           <Route exact path="/">

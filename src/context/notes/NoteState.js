@@ -50,7 +50,7 @@ const getNotes = async (title, description ,tag) => {
             user: "6182f2b2ff4fcacc2fb6f7c0",
             title: title,
             description: description,
-            tag: "personal",
+            tag: tag,
             __v: 0,
 
         }
@@ -97,19 +97,18 @@ const getNotes = async (title, description ,tag) => {
           const json = response.json(); // parses JSON response into native JavaScript objects
           console.log(json)
         
-
+        let newNotes = JSON.parse(JSON.stringify(notes))
          //logic to edit a note
-        for (let index = 0; index < notes.length; index++) {
-            const element = notes[index];
-            if(element._id === id){
-                element.title = title 
-                element.description = description
-                element.tag = tag
-
+        for (let index = 0; index < newNotes.length; index++) {
+            const element = newNotes[index];
+            if(element._id === id){ 
+                newNotes[index].title = title 
+                newNotes[index].description = description
+                newNotes[index].tag = tag
+                break;
             }
-            
         }
-           
+           setNotes(newNotes)
      };
     return (
         // context mein notes, editNote, deleteNote and addNote function ja raha h

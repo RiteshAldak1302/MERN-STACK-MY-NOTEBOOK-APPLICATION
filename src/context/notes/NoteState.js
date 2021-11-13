@@ -41,21 +41,9 @@ const getNotes = async (title, description ,tag) => {
             },
             body: JSON.stringify({title,description,tag}) // body data type must match "Content-Type" header
           });
-          const json = response.json(); // parses JSON response into native JavaScript objects
-          console.log(json)
-
-
-       const note={
-            _id: "61878c9119c52d7bdf29asd22be0d",
-            user: "6182f2b2ff4fcacc2fb6f7c0",
-            title: title,
-            description: description,
-            tag: tag,
-            __v: 0,
-
-        }
-        setNotes(notes.concat(note))       //push is the method which is used to update the note in the array but here we concat wihch  add a new array
-
+          const note = await response.json(); // parses JSON response into native JavaScript objects
+          setNotes(notes.concat(note))       //push is the method which is used to update the note in the array but here we concat wihch  add a new array
+        
      };
      // logic to delete a note in client side ( front end ) but also we have to write code to added or delete and edit  a note in backend ( database )
     const  deleteNote = async (id) => { 
@@ -72,7 +60,7 @@ const getNotes = async (title, description ,tag) => {
           const json = response.json(); // parses JSON response into native JavaScript objects
           console.log(json)
 
-        console.log("delete the note of this id : " + id) 
+        // console.log("delete the note of this id : " + id) 
         const newNotes = notes.filter((note)=>{
             return note._id !== id 
         })

@@ -15,7 +15,7 @@ function App() {
     <NoteState>
       <Router>
         <Navbar /> 
-        <Alert  message={"Note has been deleted"}/>
+        <Alert  message={"Here You Can Add Your Notes"}/>
         <div className="container"> 
         <Switch>
           <Route exact path="/">

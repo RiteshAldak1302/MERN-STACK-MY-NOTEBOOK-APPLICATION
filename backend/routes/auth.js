@@ -19,20 +19,21 @@ router.post(
     }),
   ],
   async (req, res) => {
+    let success = false
     // when we not use express-validator then we have to use below commented code to save the user data in db
     // const user = User(req.body)
-    // user.save();
+    // user.save(); 
     // let success = false 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success ,errors: errors.array() });
     }
     try {
       //if user is already exist
       let user = await User.findOne({ email: req.body.email });
       if (user) {
         
-        return res.status(400).json({ error: "sorry , user with this email id is already exist" });
+        return res.status(400).json({ success , error: "sorry , user with this email id is already exist" });
       }
       const salt = await bcrypt.genSaltSync(10); // we use await becoz it return promises
       const secPassword = await bcrypt.hash(req.body.password, salt);
@@ -50,8 +51,8 @@ router.post(
       };
       //here we use jwtwebtoken to verify user , we should not send the user data to user but we giving token to9 verify the user
       const authToken = jwt.sign(data, JWT_SCREAT);
-      
-      res.json({  authToken }); //here we ES6 ,we can also use {authToken:authToken} when key and value is same then we can write only once
+      success= true
+      res.json({ success, authToken }); //here we ES6 ,we can also use {authToken:authToken} when key and value is same then we can write only once
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error occured");

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-const Signup = () => {
+const Signup = (props) => {
 
     const [credentials, setCredentials] = useState({name:"",email :'' , password : ''})
   
@@ -19,15 +19,22 @@ const Signup = () => {
           });
           const json = await response.json(); // parses JSON response into native JavaScript objects
           console.log(json)
-         
-            //save the authtoken and redirect 
-            localStorage.setItem('token',json.authtoken);
-            history.push("/")   // after login it will redirect to the home page
+         if(json.success){
+
+           //save the authtoken and redirect 
+           localStorage.setItem('token',json.authtoken);
+           history.push("/")   // after login it will redirect to the home page
+           props.showAlert("Account Created Successfully", "success")
+
+          }
+          else{
+            props.showAlert("Invalid Credentials", "danger")
+          }
          
     }
 
     const onChange=(e)=>{
-      setCredentials({...credentials, [e.target.name] : e.target.value})
+      setCredentials({...credentials, [e.target.name] : e.target.value}) 
     }
     return (
         <div className='container'>

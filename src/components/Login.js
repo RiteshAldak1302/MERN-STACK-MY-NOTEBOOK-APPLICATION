@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom' //useHistory is imported from react-router-dom
 
 
-const Login = () => {
+const Login = (props) => {
       const [credentials, setCredentials] = useState({email :'' , password : ''})
   
     let history = useHistory() // here we use useHistory hook
@@ -20,11 +20,13 @@ const Login = () => {
           console.log(json)
           if(json.success){
             //save the authtoken and redirect 
-            localStorage.setItem('token',json.authtoken);
+            localStorage.setItem('token',json.authtoken); //here we save the token from specific user
             history.push("/")   // after login it will redirect to the home page
+            props.showAlert("Logged In Successfully", "success")
           }
           else{
-            alert("invalid credentials")
+            // props.alert("invalid credentials")
+            props.showAlert("invalid credentials", "danger")
           }
     }
 
